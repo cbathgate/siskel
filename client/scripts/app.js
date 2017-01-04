@@ -30,7 +30,6 @@ var Movies = Backbone.Collection.extend({
 });
 
 var AppView = Backbone.View.extend({
-
   events: {
     'click form input': 'handleClick'
   },
@@ -61,7 +60,7 @@ var MovieView = Backbone.View.extend({
                         </div>'),
 
   initialize: function() {
-    // your code here
+    this.listenTo(this.model, 'change', this.render);
   },
 
   events: {
@@ -69,7 +68,7 @@ var MovieView = Backbone.View.extend({
   },
 
   handleClick: function() {
-    // your code here
+    this.model.toggleLike();
   },
 
   render: function() {
@@ -82,7 +81,7 @@ var MovieView = Backbone.View.extend({
 var MoviesView = Backbone.View.extend({
 
   initialize: function() {
-    // your code here
+    this.listenTo(this.collection, 'sort', this.render);
   },
 
   render: function() {
